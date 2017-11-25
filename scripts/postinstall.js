@@ -1,10 +1,9 @@
+console.log(`cwd: ${process.cwd()}`);
+console.log(`pwd: ${process.env.PWD}`);
 // allow access to swagger-ui from /lib
 // ref: http://stackoverflow.com/questions/13786160/copy-folder-recursively-in-node-js
 const fs = require('fs-extra');
 const path = require('path');
-
-console.log(`cwd: ${process.cwd()}`);
-console.log(`pwd: ${process.env.PWD}`);
 
 var copy_swagger = function (swagger_path) {
 	fs.copy(path.join(swagger_path, 'dist'), 'lib/swagger-ui', function (err) {
