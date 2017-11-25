@@ -3,29 +3,32 @@
 const fs = require('fs-extra');
 const path = require('path');
 
+console.log(`cwd: ${process.cwd()}`);
+console.log(`pwd: ${process.env.PWD}`);
+
 var copy_swagger = function (swagger_path) {
 	fs.copy(path.join(swagger_path, 'dist'), 'lib/swagger-ui', function (err) {
 		if (err) {
 			console.error(err);
 		} else {
 
-			// use minifier version				
+			// use minifier version
 			console.log("swagger-ui ready!");
 		}
-	}); //copies directory, even if it has subdirectories or files	
+	}); //copies directory, even if it has subdirectories or files
 }
 
 fs.stat('lib/swagger-ui', function (err) {
 	if (err) {
 		console.log('copying swagger-ui to /lib...');
-		
+
 		// check for swagger library
 		var swagger_path = 'node_modules/swagger-ui';
 		fs.stat(swagger_path, function (err) {
 			if (!err) {
 				return copy_swagger(swagger_path);
 			}
-	
+
 			// check elsewhere
 			swagger_path = '../swagger-ui';
 			fs.stat(swagger_path, function (err) {
@@ -38,7 +41,11 @@ fs.stat('lib/swagger-ui', function (err) {
 	}
 });
 
-fs.stat('config.js', function (err) {
+fs.stat('config.js', function (err, stat) {
+    console.log('==== err ====');
+    console.log(err);
+    console.log('==== stat ====');
+    console.log(stat);
 	if (err) {
 		console.log('copying default config.js file from config.js.default...');
 		fs.copy('config.js.default', 'config.js', function (err) {
