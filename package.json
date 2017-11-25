@@ -4,7 +4,7 @@
   "description": "node.js framework to prototype and scale rapidly",
   "main": "index.js",
   "scripts": {
-    "postinstall": "node ./scripts/postinstall.js",
+    "postinstall": "source ./scripts/postinstall.sh",
     "test": "node test/*.js",
     "start": "node monitor/frontier.js monitor/settings.js"
   },
